@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/index.css">
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <div id="app" class="h-screen w-screen">
+    <div class="top-0 h-[10%] bg-[#1e1e1e] p-0 m-0 w-full  flex justify-center items-center">
+      <div class=" flex justify-between items-center max-w-[1280px] w-[80%]">
+        <h1 class="w-full text-3xl font-bold">Hello</h1>
+        <ul class="flex justify-between items-center w-[60%] lg:w-[35%]">
+          <li class="text-lg">First</li>
+          <li class="text-lg">Second</li>
+          <li class="text-lg">Third</li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="flex justify-start items-center h-[90%] w-full p-0">
+     <img src="./src/Assets/pngtree.png" alt="" class="hidden">
+     <canvas id="glcanvas" class="h-full w-full"></canvas>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
