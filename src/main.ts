@@ -46,7 +46,7 @@ const main: () => void = async () => {
     setTimeout(() => {
       requestAnimationFrame(render);
       i++;
-    }, 2500);
+    }, 1000);
   }
   requestAnimationFrame(render)
 
