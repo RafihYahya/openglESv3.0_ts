@@ -58,7 +58,7 @@ export class Renderer {
         cglRender(this.renderData.vec4, this.renderData.drawCount, this.renderData.offset)
         canvas.height = innerHeight
         canvas.width = innerWidth
-        DEBUG_LOG('F:Renderer::DRAW', this.uniforms)
+        DEBUG_LOG('F:Renderer::Draw', this.uniforms)
     }
 
     bind() {
