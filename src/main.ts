@@ -4,6 +4,7 @@ import { Renderer } from './MODULES/Renderer/rendering';
 import { Shader } from './MODULES/Shaders/shader';
 import { Texture } from './MODULES/Textures/texture';
 import { BUFFER } from './Types/global_types';
+import { UniformData } from './Types/shader_type';
 import { bufferInit, genRandVec4 } from './Utils/fn_utils';
 
 
@@ -36,8 +37,8 @@ const main: () => void = async () => {
   let i = 0;
   const render = () => {
 
-    let drawUniformData = { ...uniformColor00, uniData: genRandVec4() }
-    let drawUniformData1 = { ...uniformColor01, uniData: genRandVec4() }
+    let drawUniformData: UniformData[] = [{ ...uniformColor00, uniData: genRandVec4() }]
+    let drawUniformData1: UniformData[] = [{ ...uniformColor01, uniData: genRandVec4() }]
 
     forFun(drawUniformData, drawUniformData1)
 
@@ -49,15 +50,15 @@ const main: () => void = async () => {
   }
   requestAnimationFrame(render)
 
-  const forFun = (x: any, y: any) => {
+  const forFun = (x: UniformData[], y: UniformData[]) => {
     if (i % 2 == 0) {
-      renderer.swapShader(ShaderProg, [x])
+      renderer.swapShader(ShaderProg, x)
       renderer.Draw()
-      renderer.updateUniforms([x])
+      renderer.updateUniforms(x)
     } else {
-      renderer.swapShader(ShaderProg2, [y])
+      renderer.swapShader(ShaderProg2, y)
       renderer.Draw()
-      renderer.updateUniforms([y])
+      renderer.updateUniforms(y)
     }
 
   }
