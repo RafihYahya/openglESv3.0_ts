@@ -1,10 +1,10 @@
-import { myrenderData, shaderSourceTemp, uniformColor00 } from './DATA/mock_data';
+import { myrenderData, shaderSourceTemp, shaderSourceTemp2, uniformColor00, uniformColor01 } from './DATA/mock_data';
 import { vertexDataSample } from './DATA/vertex_data';
-import { IndexBuffer, VertexArrayBuffer, VertexBuffer, VertexBufferLayout } from './MODULES/Buffers/vertex_buffer';
 import { Renderer } from './MODULES/Renderer/rendering';
 import { Shader } from './MODULES/Shaders/shader';
 import { Texture } from './MODULES/Textures/texture';
-import { genRandVec4 } from './Utils/fn_utils';
+import { BUFFER } from './Types/global_types';
+import { bufferInit, genRandVec4 } from './Utils/fn_utils';
 
 
 
@@ -14,37 +14,33 @@ const main: () => void = async () => {
   /* 
   * SHADERS  ***************************
   */
+
   const ShaderProg = new Shader(shaderSourceTemp, [uniformColor00])
+  const ShaderProg2 = new Shader(shaderSourceTemp2, [uniformColor01])
   /* 
   *  BUFFERS ***************************
   */
-  const VAO = new VertexArrayBuffer();
-  const VBO = new VertexBuffer(vertexDataSample.positions);
-  const VIB = new IndexBuffer(vertexDataSample.indices);
-  const VLayout = new VertexBufferLayout();
-  /*  */
-  VLayout.push<number>(3);
-  VAO.AddBuffer(VBO, VLayout)
 
-
+  const [VAO]: BUFFER = bufferInit(vertexDataSample.positions, vertexDataSample.indices, 3)
   /* 
    * TEXTURES
   */
 
   const TEXTURE = new Texture()
 
-
   /* 
   * RENDERING **********************
   */
-  const renderer = new Renderer(ShaderProg, VAO, myrenderData)
+  const renderer = new Renderer(ShaderProg, VAO, myrenderData, [uniformColor00])
 
   let i = 0;
   const render = () => {
 
     let drawUniformData = { ...uniformColor00, uniData: genRandVec4() }
-    renderer.Draw([drawUniformData])
-    forFun()
+    let drawUniformData1 = { ...uniformColor01, uniData: genRandVec4() }
+
+    forFun(drawUniformData, drawUniformData1)
+
 
     setTimeout(() => {
       requestAnimationFrame(render);
@@ -53,11 +49,15 @@ const main: () => void = async () => {
   }
   requestAnimationFrame(render)
 
-  const forFun = () => {
+  const forFun = (x: any, y: any) => {
     if (i % 2 == 0) {
-      myrenderData.drawCount = 6
+      renderer.swapShader(ShaderProg, [x])
+      renderer.Draw()
+      renderer.updateUniforms([x])
     } else {
-      myrenderData.drawCount = 3
+      renderer.swapShader(ShaderProg2, [y])
+      renderer.Draw()
+      renderer.updateUniforms([y])
     }
 
   }

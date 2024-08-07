@@ -34,9 +34,10 @@ export class Shader implements ShaderType {
         this.createShader();
         this.unbind();
         this.setupUnifromsLocation()
-        gl.useProgram(this.m_RendererId)
 
+        DEBUG_LOG("CONSTRUCTOR => SUCCESS")
         DEBUG_LOG(this.m_RendererId, this.shaders, g_uni, shaderSource)
+
 
 
     }
@@ -59,7 +60,7 @@ export class Shader implements ShaderType {
     }
 
     unbindProgram() {
-        gl.useProgram(this.m_RendererId)
+        gl.useProgram(null)
 
     }
 
@@ -72,7 +73,6 @@ export class Shader implements ShaderType {
             DEBUG_LOG('F:setupUniformsLocation', e)
         })
     }
-
 
     setUniformBatch(uniforms: UniformData[]) {
         uniforms.forEach((e) => {
@@ -92,6 +92,10 @@ export class Shader implements ShaderType {
             vs: this.shaders.vs,
             fs: this.shaders.fs,
         }
+    }
+
+    useProgram(){
+        gl.useProgram(this.m_RendererId)
     }
 
     private compileShader() {

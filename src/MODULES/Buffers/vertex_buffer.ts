@@ -20,7 +20,7 @@ export class VertexBuffer implements vBuffer {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.m_rendererId)
     }
     unbind = () => {
-        gl.bindBuffer(gl.ARRAY_BUFFER, 0)
+        gl.bindBuffer(gl.ARRAY_BUFFER, null)
 
     }
     delete = () => {
@@ -39,7 +39,7 @@ export class IndexBuffer implements vBuffer {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.m_rendererId)
     }
     unbind = () => {
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, 0)
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null)
 
     }
     delete = () => {
@@ -110,7 +110,7 @@ export class VertexArrayBuffer {
 
     }
     unbind() {
-        gl.bindVertexArray(0);
+        gl.bindVertexArray(null);
 
     }
 }

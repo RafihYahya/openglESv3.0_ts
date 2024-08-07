@@ -35,24 +35,39 @@ export class Renderer {
     va: VertexArrayBuffer
     //ib: IndexBuffer
     renderData: renderData
-    constructor(shader: Shader, va: VertexArrayBuffer, renderData: renderData) {
+    uniforms: UniformData[]
+    constructor(shader: Shader, va: VertexArrayBuffer, renderData: renderData, uniforms: UniformData[]) {
         this.shader = shader
         this.va = va
-        //this.ib = ib
+        this.uniforms = uniforms
         this.renderData = renderData
 
         va.bind()
-        //ib.bind()
     }
 
-    Draw(uniforms?: UniformData[]) {
-        if (uniforms !== undefined) {
-            this.shader.setUniformBatch(uniforms)
+    Draw() {
+        this.bind()
+        if (this.uniforms !== undefined) {
+            this.shader.setUniformBatch(this.uniforms)
         }
 
         cglRender(this.renderData.vec4, this.renderData.drawCount, this.renderData.offset)
         canvas.height = innerHeight
         canvas.width = innerWidth
+    }
+
+    bind(){
+        this.shader.useProgram()
+    }
+
+    updateUniforms(uniforms: UniformData[]) {
+        this.uniforms = uniforms
+    }
+
+    swapShader(shader: Shader, uniforms: UniformData[]) {
+        this.shader = shader
+        this.updateUniforms(uniforms)
+        shader.useProgram()
     }
 }
 
