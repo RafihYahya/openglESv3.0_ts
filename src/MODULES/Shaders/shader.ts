@@ -35,13 +35,13 @@ export class Shader implements ShaderType {
         this.unbind();
         this.setupUnifromsLocation()
 
-        DEBUG_LOG("CONSTRUCTOR => SUCCESS")
-        DEBUG_LOG(this.m_RendererId, this.shaders, g_uni, shaderSource)
+        DEBUG_LOG("IN:Shader::Constructor", [this.m_RendererId, this.shaders, g_uni, shaderSource])
 
 
 
     }
     bind(): void {
+        DEBUG_LOG('F:Shader::bind -- START --', [this.shaders.fs, this.shaders.vs])
         this.shaders.vs = gl.createShader(gl.VERTEX_SHADER);
         if (this.shaders.fs === null) {
             throw new Error("Can't Create Vertex Shader");
@@ -50,17 +50,20 @@ export class Shader implements ShaderType {
         if (this.shaders.vs === null) {
             throw new Error("Can't Create Fragment Shader");
         }
-
+        DEBUG_LOG('F:Shader::bind -- END --', [this.shaders.fs, this.shaders.vs])
     }
     unbind(): void {
 
+        DEBUG_LOG('F:Shader::unbind -- START --', [this.shaders.fs, this.shaders.vs])
         gl.deleteShader(this.shaders.vs)
         gl.deleteShader(this.shaders.fs)
+        DEBUG_LOG('F:Shader::unbind -- END --', [this.shaders.fs, this.shaders.vs])
 
     }
 
     unbindProgram() {
         gl.useProgram(null)
+        DEBUG_LOG('F:Shader::unbindProgram')
 
     }
 
@@ -72,6 +75,7 @@ export class Shader implements ShaderType {
             e.uniLocation = gl.getUniformLocation(this.m_RendererId, e.uniName)
             DEBUG_LOG('F:setupUniformsLocation', e)
         })
+        DEBUG_LOG('F:Shader::setupUnifromsLocation', arguments)
     }
 
     setUniformBatch(uniforms: UniformData[]) {
@@ -79,9 +83,9 @@ export class Shader implements ShaderType {
             if (e.uniName.includes('u_Color'))
                 gl.uniform4f(e.uniLocation, (<Vec4>e.uniData).x, (<Vec4>e.uniData).y, (<Vec4>e.uniData).z, (<Vec4>e.uniData).w)
             if (e.uniName.includes('u_Texture'))
-                console.log('HERE GOES TEXTURE')
+                DEBUG_LOG('TO:SETUP TEXTURE HERE')
         })
-        DEBUG_LOG('F:setUniformBatch', uniforms)
+        DEBUG_LOG('F:setUniformBatch', [uniforms, arguments])
     }
 
     getProgram(): WebGLProgram | null {
@@ -94,8 +98,9 @@ export class Shader implements ShaderType {
         }
     }
 
-    useProgram(){
+    useProgram() {
         gl.useProgram(this.m_RendererId)
+        DEBUG_LOG('F:Shader::useProgram', [arguments, this.m_RendererId])
     }
 
     private compileShader() {
@@ -112,7 +117,7 @@ export class Shader implements ShaderType {
             console.error("An error occurred compiling the shaders: ", gl.getShaderInfoLog(this.shaders.fs!));
             throw new Error("Couldn't Compile Shaders");
         }
-        DEBUG_LOG('F:compileShader => Success')
+        DEBUG_LOG('F:Shader::compileShader => Success', arguments)
 
     }
 
@@ -121,6 +126,8 @@ export class Shader implements ShaderType {
         this.bind();
         gl.shaderSource(this.shaders.vs!, this.shaderSource.vertexShader);
         gl.shaderSource(this.shaders.fs!, this.shaderSource.fragementShader);
+
+        DEBUG_LOG('F:Shader::parseShader => Success', arguments)
 
     }
 
@@ -134,7 +141,7 @@ export class Shader implements ShaderType {
         gl.attachShader(this.m_RendererId, this.shaders.fs!);
         gl.linkProgram(this.m_RendererId);
 
-        DEBUG_LOG("F:createShader", this.m_RendererId)
+        DEBUG_LOG("F:Shader::createShader", [arguments, this.m_RendererId])
 
     }
 

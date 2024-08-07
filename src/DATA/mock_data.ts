@@ -23,24 +23,27 @@ let uniformDtTemp2: Uniforms4fData = {
     data: { x: 0.2, y: 0.4, z: 0.6, w: 1.0 }
 
 } */
-export let uniformColor00: UniformData = {
+let uniformColor00: UniformData = {
     uniName: UniformsName.COLOR,
     uniLocation: null,
     uniData: { x: 0.2, y: 0.4, z: 0.6, w: 1.0 }
 
 }
-export let uniformColor01: UniformData = {
-    uniName: UniformsName.COLOR+'2',
+let uniformColor01: UniformData = {
+    uniName: UniformsName.COLOR + '2',
     uniLocation: null,
     uniData: { x: 0.2, y: 0.4, z: 0.6, w: 1.0 }
 
 }
-
-export let unifromTexture00: UniformData = {
+let unifromTexture00: UniformData = {
     uniName: UniformsName.TEXTURE,
     uniLocation: null,
     uniData: null
 }
+
+export let UniforsCollectionsShader0: UniformData[] = [uniformColor00, unifromTexture00]
+export let UniforsCollectionsShader1: UniformData[] = [uniformColor01, unifromTexture00]
+
 
 
 export let vecClearColor: Vec4 = {

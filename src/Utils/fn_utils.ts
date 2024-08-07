@@ -1,5 +1,6 @@
 import { IndexBuffer, VertexArrayBuffer, VertexBuffer, VertexBufferLayout } from "../MODULES/Buffers/vertex_buffer";
 import { GL_CheckError, GL_ClearError } from "../MODULES/error_handling"
+import { DEBUG_LOG } from "../MODULES/Logging/console_logging";
 import { BUFFER, Vec4 } from "../Types/global_types";
 
 export const GL_Error = (fn: any): void => {
@@ -30,6 +31,7 @@ export const genRandVec4 = () => {
         z: Math.random(),
         w: 1.0
     }
+    DEBUG_LOG('F:genRandVec4', vecRandomUniform4)
     return vecRandomUniform4
 }
 
@@ -41,6 +43,9 @@ export const bufferInit = (bufferData: number[], indexData: number[], count: num
     /*  */
     VLayout.push<number>(count);
     VAO.AddBuffer(VBO, VLayout);
+
+    DEBUG_LOG('F:BufferInit', [bufferData, indexData, count])
+    DEBUG_LOG('D:BufferInit::DATA', [VAO, VBO, VIB, VLayout])
 
     return [VAO, VBO, VIB, VLayout]
 }

@@ -26,6 +26,10 @@ export class VertexBuffer implements vBuffer {
     delete = () => {
         GL_Error(() => gl.deleteBuffer(this.m_rendererId))
     }
+    updateData = (data: number[]) => {
+        this.bind()
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW)
+    }
 }
 
 export class IndexBuffer implements vBuffer {
@@ -58,7 +62,7 @@ export class VertexBufferLayout {
     }
 
     // TODO : IMPROVE CODE TO HANDLE DIFFERENT TYPES WITH CORRECT STRIDES AND OFFSETS
-    
+
     push<Type>(count: Type): void {
         if (typeof count == 'number') {
             this.m_Elements.push({ type: gl.FLOAT, size: <number>count, normalized: false })

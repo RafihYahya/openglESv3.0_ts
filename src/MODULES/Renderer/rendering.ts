@@ -5,6 +5,7 @@ import { GL_Error } from "../../Utils/fn_utils";
 import { vec4 } from "../../Utils/type_utils";
 import { VertexArrayBuffer } from "../Buffers/vertex_buffer";
 import { canvas, gl } from "../Canva/canva";
+import { DEBUG_LOG } from "../Logging/console_logging";
 import { Shader } from "../Shaders/shader";
 
 
@@ -43,31 +44,45 @@ export class Renderer {
         this.renderData = renderData
 
         va.bind()
+
+        DEBUG_LOG('F:Renderer::Constructor', arguments)
     }
 
     Draw() {
         this.bind()
         if (this.uniforms !== undefined) {
+            DEBUG_LOG('D:Renderer::Uniforms', this.uniforms)
             this.shader.setUniformBatch(this.uniforms)
         }
 
         cglRender(this.renderData.vec4, this.renderData.drawCount, this.renderData.offset)
         canvas.height = innerHeight
         canvas.width = innerWidth
+        DEBUG_LOG('F:Renderer::DRAW', this.uniforms)
     }
 
-    bind(){
+    bind() {
         this.shader.useProgram()
+        DEBUG_LOG('F:Renderer::bind', arguments)
     }
 
     updateUniforms(uniforms: UniformData[]) {
         this.uniforms = uniforms
+        DEBUG_LOG('F:Renderer::UpdateUniforms', arguments)
     }
 
     swapShader(shader: Shader, uniforms: UniformData[]) {
         this.shader = shader
         this.updateUniforms(uniforms)
         shader.useProgram()
+
+        DEBUG_LOG('F:Renderer::SwapShader', arguments)
+    }
+
+    swapVAO(VAO: VertexArrayBuffer) {
+        this.va = VAO
+        this.va.bind()
+        DEBUG_LOG('F:Renderer::SwapVAO', arguments)
     }
 }
 
