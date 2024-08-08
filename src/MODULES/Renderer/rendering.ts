@@ -34,13 +34,13 @@ const cglRender = (vector4: Vec4, count: GLsizei, offset: GLintptr) => {
 export class Renderer {
     shader: Shader
     va: VertexArrayBuffer
-    //ib: IndexBuffer
     renderData: renderData
-    uniforms: UniformData[]
-    constructor(shader: Shader, va: VertexArrayBuffer, renderData: renderData, uniforms: UniformData[]) {
+    private uniforms: UniformData[]
+    
+    constructor(shader: Shader, va: VertexArrayBuffer, renderData: renderData) {
         this.shader = shader
         this.va = va
-        this.uniforms = uniforms
+        this.uniforms = shader.g_uni
         this.renderData = renderData
 
         va.bind()

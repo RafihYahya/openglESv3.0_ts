@@ -16,7 +16,6 @@ const uniformColor01 = UniforsCollectionsShader1.filter(e => e.uniName == 'u_Col
 
 const main: () => void = async () => {
 
-
   /* 
   * SHADERS  ***************************
   */
@@ -29,7 +28,7 @@ const main: () => void = async () => {
   */
 
   const [VAO, ...restBuffs]: BUFFER = bufferInit(vertexDataSample.positions, vertexDataSample.indices, 3)
- 
+
   /* 
    * TEXTURES
   */
@@ -40,8 +39,8 @@ const main: () => void = async () => {
   /* 
   * RENDERING **********************
   */
- 
-  const renderer = new Renderer(ShaderProg, VAO, myrenderData, uniformColor00)
+
+  const renderer = new Renderer(ShaderProg, VAO, myrenderData)
 
   let i = 0;
   const render = () => {
