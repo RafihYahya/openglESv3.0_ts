@@ -2,7 +2,7 @@ import { Vec4 } from "../../Types/global_types";
 import { renderData } from "../../Types/renderer_types";
 import { UniformData } from "../../Types/shader_type";
 import { vec4 } from "../../Utils/type_utils";
-import { VertexArrayBuffer } from "../Buffers/vertex_buffer";
+import { IndexBuffer, VertexArrayBuffer } from "../Buffers/vertex_buffer";
 import { canvas, gl } from "../Canva/canva";
 import { DEBUG_LOG } from "../Logging/console_logging";
 import { Shader } from "../Shaders/shader";
@@ -47,7 +47,10 @@ export class Renderer {
         DEBUG_LOG('F:Renderer::Constructor', arguments)
     }
 
-    Draw() {
+    Draw(ib?: IndexBuffer) {
+        if (ib != (undefined || null)) {
+            ib.bind()
+        }
         this.bind()
         if (this.uniforms !== undefined) {
             DEBUG_LOG('D:Renderer::Uniforms', this.uniforms)

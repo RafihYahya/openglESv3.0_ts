@@ -27,7 +27,7 @@ const vertices: number[] = [
   -0.5, -0.5, 0.0, 1.0, 1.0,   // bottom left
   -0.5, 0.5, 0.0, 1.0, 0.0,    // top left 
 ];
-const indices: number[] = [0, 1, 3, 1, 2, 3];
+const indices: number[] = [0, 1, 3, 1, 0, 3];
 const indices2: number[] =
   [0, 1, 3,   // first triangle
     1, 2, 3];
