@@ -31,7 +31,7 @@ void main()
 {
     
     vec4 texColor = texture(u_Texture,v_TextCoord);
-    FragColor = texColor;
+    FragColor = u_Color*0.25 + texColor;
 
 }`
 
