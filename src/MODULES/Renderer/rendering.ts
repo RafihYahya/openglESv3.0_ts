@@ -1,7 +1,6 @@
 import { Vec4 } from "../../Types/global_types";
 import { renderData } from "../../Types/renderer_types";
 import { UniformData } from "../../Types/shader_type";
-import { GL_Error } from "../../Utils/fn_utils";
 import { vec4 } from "../../Utils/type_utils";
 import { VertexArrayBuffer } from "../Buffers/vertex_buffer";
 import { canvas, gl } from "../Canva/canva";
@@ -26,7 +25,7 @@ const cglRender = (vector4: Vec4, count: GLsizei, offset: GLintptr) => {
     ));
     gl.clear(gl.COLOR_BUFFER_BIT);
     //
-    GL_Error(() => gl.drawElements(gl.TRIANGLES, count, gl.UNSIGNED_INT, offset));
+    gl.drawElements(gl.TRIANGLES, count, gl.UNSIGNED_INT, offset);
 
 }
 
@@ -36,7 +35,7 @@ export class Renderer {
     va: VertexArrayBuffer
     renderData: renderData
     private uniforms: UniformData[]
-    
+
     constructor(shader: Shader, va: VertexArrayBuffer, renderData: renderData) {
         this.shader = shader
         this.va = va

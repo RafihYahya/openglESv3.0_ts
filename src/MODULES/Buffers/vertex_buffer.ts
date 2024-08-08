@@ -1,6 +1,7 @@
 import { vBuffer, VertexBufferElements } from "../../Types/vertex_buffer"
 import { GL_Error } from "../../Utils/fn_utils"
 import { gl } from "../Canva/canva"
+import { DEBUG_LOG } from "../Logging/console_logging"
 
 
 
@@ -63,11 +64,18 @@ export class VertexBufferLayout {
 
     // TODO : IMPROVE CODE TO HANDLE DIFFERENT TYPES WITH CORRECT STRIDES AND OFFSETS
 
-    push<Type>(count: Type): void {
-        if (typeof count == 'number') {
+    push(count: number, type: number): void {
+        if (type == gl.FLOAT) {
             this.m_Elements.push({ type: gl.FLOAT, size: <number>count, normalized: false })
-            this.m_Stride += 12
+            this.m_Stride += 4 * (<number>count)
         }
+        if (type == gl.UNSIGNED_INT) {
+            throw new Error("Not Ready Yet");
+
+            this.m_Elements.push({ type: gl.UNSIGNED_INT, size: Math.floor(<number>count), normalized: false })
+            this.m_Stride += 4
+        }
+        DEBUG_LOG('F:Vlayout::Push', this.m_Elements)
 
     }
 
@@ -103,10 +111,10 @@ export class VertexArrayBuffer {
         elems.forEach((value, index) => {
             gl.enableVertexAttribArray(index);
             gl.vertexAttribPointer(index, value.size, gl.FLOAT, value.normalized, layout.getStride(), offset)
-            offset += value.size
-
+            offset += (value.size) * 4
         });
 
+        DEBUG_LOG("D:m_Elements", [elems, offset])
 
     }
     bind() {

@@ -75,15 +75,16 @@ export class Shader implements ShaderType {
             e.uniLocation = gl.getUniformLocation(this.m_RendererId, e.uniName)
             DEBUG_LOG('F:setupUniformsLocation', e)
         })
-        DEBUG_LOG('F:Shader::setupUnifromsLocation', arguments)
+        DEBUG_LOG('F:Shader::setupUnifromsLocation', this.g_uni)
     }
 
-    setUniformBatch(uniforms: UniformData[]) {
+    setUniformBatch(uniforms: UniformData[], textureSlot?: number) {
+        gl.useProgram(this.m_RendererId)
         uniforms.forEach((e) => {
             if (e.uniName.includes('u_Color'))
                 gl.uniform4f(e.uniLocation, (<Vec4>e.uniData).x, (<Vec4>e.uniData).y, (<Vec4>e.uniData).z, (<Vec4>e.uniData).w)
             if (e.uniName.includes('u_Texture'))
-                DEBUG_LOG('TO:SETUP TEXTURE HERE')
+                gl.uniform1i(e.uniLocation, <number>(textureSlot == undefined ? 0 : textureSlot))
         })
         DEBUG_LOG('F:setUniformBatch', [uniforms, arguments])
     }

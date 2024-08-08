@@ -1,4 +1,5 @@
 import { IndexBuffer, VertexArrayBuffer, VertexBuffer, VertexBufferLayout } from "../MODULES/Buffers/vertex_buffer";
+import { gl } from "../MODULES/Canva/canva";
 import { GL_CheckError, GL_ClearError } from "../MODULES/error_handling"
 import { DEBUG_LOG } from "../MODULES/Logging/console_logging";
 import { BUFFER, Vec4 } from "../Types/global_types";
@@ -35,17 +36,20 @@ export const genRandVec4 = () => {
     return vecRandomUniform4
 }
 
-export const bufferInit = (bufferData: number[], indexData: number[], count: number): BUFFER => {
+export const bufferInit = (bufferData: number[], indexData: number[], count: number[]): BUFFER => {
     const VAO = new VertexArrayBuffer();
     const VBO = new VertexBuffer(bufferData);
     const VIB = new IndexBuffer(indexData);
     const VLayout = new VertexBufferLayout();
     /*  */
-    VLayout.push<number>(count);
+    count.forEach(e => {
+        VLayout.push(e, gl.FLOAT)
+    })
     VAO.AddBuffer(VBO, VLayout);
 
     DEBUG_LOG('F:BufferInit', [bufferData, indexData, count])
     DEBUG_LOG('D:BufferInit::DATA', [VAO, VBO, VIB, VLayout])
+
 
     return [VAO, VBO, VIB, VLayout]
 }
