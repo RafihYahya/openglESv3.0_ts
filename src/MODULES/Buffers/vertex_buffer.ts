@@ -35,10 +35,14 @@ export class VertexBuffer implements vBuffer {
 
 export class IndexBuffer implements vBuffer {
     private m_rendererId: WebGLBuffer
-    constructor(data: number[]) {
+    constructor(data: number[], oldIb?: IndexBuffer) {
         this.m_rendererId = gl.createBuffer()!
         GL_Error(() => gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.m_rendererId))
         GL_Error(() => gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Int32Array(data), gl.STATIC_DRAW))
+        if (oldIb != (undefined)) {
+            GL_Error(() => this.unbind())
+            oldIb.bind()
+        }
     }
     bind = () => {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.m_rendererId)
@@ -117,8 +121,9 @@ export class VertexArrayBuffer {
         DEBUG_LOG("D:m_Elements", [elems, offset])
 
     }
-    bind() {
+    bind(ib?: IndexBuffer) {
         gl.bindVertexArray(this.m_Render_Id);
+        if (ib != undefined) ib.bind()
 
     }
     unbind() {

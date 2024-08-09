@@ -1,11 +1,12 @@
 import { myrenderData, shaderSourceTemp, UniforsCollectionsShader0 } from './DATA/mock_data';
-import { vertexDataSample2 } from './DATA/vertex_data';
+import { vertexDataSample, vertexDataSample2 } from './DATA/vertex_data';
 import { htmlimage } from './MODULES/Asset_Handler/image';
+import { IndexBuffer } from './MODULES/Buffers/vertex_buffer';
 import { DEBUG_LOG } from './MODULES/Logging/console_logging';
 import { Renderer } from './MODULES/Renderer/rendering';
 import { Shader } from './MODULES/Shaders/shader';
 import { Texture } from './MODULES/Textures/texture';
-import { BUFFER } from './Types/global_types';
+import { BufferObject } from './Types/global_types';
 import { UniformData } from './Types/shader_type';
 import { bufferInit, genRandVec4 } from './Utils/fn_utils';
 
@@ -27,10 +28,11 @@ const main: () => void = async () => {
   *  BUFFERS ***************************
   */
 
-  const [VAO, ...restBuffs]: BUFFER = bufferInit(vertexDataSample2.positions, vertexDataSample2.indices, [3, 2])
+  const BUFFER_0: BufferObject = bufferInit(vertexDataSample2.positions, vertexDataSample2.indices, [3, 2])
+  const BUFFER_1: BufferObject = bufferInit(vertexDataSample2.positions, vertexDataSample.indices, [3, 2])
 
   /* 
-   * TEXTURES
+  * TEXTURES
   */
 
   const TEX = new Texture({ localBuffer: htmlimage, height: 150, width: 150 }); TEX.bind(0)
@@ -42,7 +44,7 @@ const main: () => void = async () => {
   * RENDERING **********************
   */
 
-  const renderer = new Renderer(ShaderProg, VAO, myrenderData)
+  const renderer = new Renderer(ShaderProg, BUFFER_0.VAO, myrenderData)
 
   let i = 0;
   const render = () => {
@@ -62,9 +64,10 @@ const main: () => void = async () => {
   requestAnimationFrame(render)
 
   const forFun = (x: UniformData[]) => {
-    renderer.swapShader(ShaderProg, x)
+    //renderer.swapShader(ShaderProg, x)
     renderer.Draw()
-    renderer.updateUniforms(x)
+
+    // renderer.updateUniforms(x)
 
 
   }

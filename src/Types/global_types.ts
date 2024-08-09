@@ -11,5 +11,14 @@ export type Vec4 = {
 export type glcleartuple = [GLclampf, GLclampf, GLclampf, GLclampf]
 
 
-export type BUFFER = [VertexArrayBuffer , VertexBuffer , IndexBuffer , VertexBufferLayout]
+type BUFFER = [VertexArrayBuffer, VertexBuffer, IndexBuffer, VertexBufferLayout]
+
+
+export type BufferObject = {
+
+    VAO: VertexArrayBuffer
+    VBO: VertexBuffer
+    IB: IndexBuffer
+    VLAY: VertexBufferLayout
+}
 

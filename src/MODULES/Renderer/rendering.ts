@@ -42,12 +42,12 @@ export class Renderer {
         this.uniforms = shader.g_uni
         this.renderData = renderData
 
-        va.bind()
-
+        
         DEBUG_LOG('F:Renderer::Constructor', arguments)
     }
-
+    
     Draw(ib?: IndexBuffer) {
+        this.va.bind()
         if (ib != (undefined || null)) {
             ib.bind()
         }

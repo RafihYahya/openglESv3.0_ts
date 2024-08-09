@@ -32,5 +32,5 @@ const indices2: number[] =
   [0, 1, 3,   // first triangle
     1, 2, 3];
 
-let vertexDataSample = new VertexData(positions, indices);
+export let vertexDataSample = new VertexData(positions, indices);
 export let vertexDataSample2 = new VertexData(vertices, indices2);
