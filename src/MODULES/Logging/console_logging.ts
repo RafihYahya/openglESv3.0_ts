@@ -13,6 +13,7 @@ const ANSI_COLORS = (s: string, color: string): string => {
 
 
 export const DEBUG_LOG = (...args: any[]) => {
+    if (import.meta.env.PROD) return
     args.forEach((e) => {
         if (typeof (e) == 'string') {
             if ((<string>e).includes('F:')) {

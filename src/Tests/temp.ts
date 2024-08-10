@@ -1,53 +1,54 @@
+import { gl } from "../MODULES/Canva/canva"
 
-
-type Vec4 = { x: number } & { y: number }
-let z: number = 5
-
-let myvec: Vec4 =
-{
-    x: 4,
-    y: 6
+function miaw(constructor: Function) {
+    console.log('miaw')
 }
 
-type testType = {
-    readonly miaw: 556;
-    blaw(): void
-}
+export const runTests = (): void => {
+    if (import.meta.env.PROD) return
 
-let testTest: testType = {
-    blaw(): void {
-        console.log("lol");
-    },
-    miaw: 556
-}
-
-interface lolima {
-    readonly bkiaw: 3434;
-    blaw(): void
-}
-
-testTest.blaw()
-
-
-/* declare global {
-    interface WebGLProgram{
-        miaw():void
+    @miaw
+    class temp0 {
+        constructor() {
+            console.log('temp0')
+        }
     }
+    let temp00 = new temp0()
+
+
+    const myfunc = <T>(...arg: T[]): void => {
+        arg.forEach(e => {
+            console.log(e)
+            e instanceof WebGL2RenderingContext ? console.log(e.FLOAT) : console.log('NOOOOOO')
+        })
+    }
+    myfunc<WebGL2RenderingContext>(gl)
+
+    type BINARYTREE<T> = {
+        value: T
+        node1: BINARYTREE<T> | null
+        node2: BINARYTREE<T> | null
+    }
+
+    const printTREE = <T>(x: BINARYTREE<T>) => {
+        console.log(x.value)
+        if (x.node1 == null) {
+            return
+        }
+        printTREE(x.node1)
+    }
+    printTREE<number>({
+        value: 5,
+        node1: {
+            value: 6,
+            node1: {
+                value: 98,
+                node1: null,
+                node2: null
+            },
+            node2: null
+        },
+        node2: null
+    })
+
 }
-
-WebGLProgram.prototype.miaw = () => {
-    console.log('miaw miaw')
-} */
-
-
-type DynamicObject = {
-    [name: string]: any
-}
-
-const myDynObj:DynamicObject = {
-    'yahya': 'miaw',
-    '33': 4,
-    '353': 'miaw',
-}
-
-myDynObj["miaw"] = 5

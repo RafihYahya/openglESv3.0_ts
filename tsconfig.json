@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
+    "noImplicitAny": true,
     "noImplicitOverride": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,

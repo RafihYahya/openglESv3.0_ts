@@ -5,6 +5,7 @@ import { DEBUG_LOG } from './MODULES/Logging/console_logging';
 import { Renderer } from './MODULES/Renderer/rendering';
 import { Shader } from './MODULES/Shaders/shader';
 import { Texture } from './MODULES/Textures/texture';
+import { runTests } from './Tests/temp';
 import { BufferObject } from './Types/global_types';
 import { UniformData } from './Types/shader_type';
 import { bufferInit, genRandVec4 } from './Utils/fn_utils';
@@ -13,6 +14,16 @@ import { bufferInit, genRandVec4 } from './Utils/fn_utils';
 
 
 const main: () => void = async () => {
+
+  /* 
+  * TESTS
+  */
+
+  runTests()
+ 
+  /* 
+  * DATA
+  */
 
   const uniformColor00 = UniforsCollectionsShader0.filter(e => (e.uniName == 'u_Color' || e.uniName == 'u_Texture'))
   DEBUG_LOG('D:UniformsMainData', uniformColor00)
@@ -34,7 +45,7 @@ const main: () => void = async () => {
   * TEXTURES
   */
 
-  const TEX = new Texture({ localBuffer: htmlimage, height: 150, width: 150 }); TEX.bind(0)
+  const TEX = new Texture({ localBuffer: htmlimage, height: 300, width: 300 }); TEX.bind(0)
   ShaderProg.setUniformBatch(UniforsCollectionsShader0.filter(e => e.uniName == 'u_Texture'), 0)
 
   DEBUG_LOG('D:ShaderProg->G_uni', ShaderProg.g_uni[1]);
