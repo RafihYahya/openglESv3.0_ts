@@ -42,10 +42,10 @@ export class Renderer {
         this.uniforms = shader.g_uni
         this.renderData = renderData
 
-        
+
         DEBUG_LOG('F:Renderer::Constructor', arguments)
     }
-    
+
     Draw(ib?: IndexBuffer) {
         this.va.bind()
         if (ib != (undefined || null)) {
@@ -61,6 +61,26 @@ export class Renderer {
         canvas.height = innerHeight
         canvas.width = innerWidth
         DEBUG_LOG('F:Renderer::Draw', this.uniforms)
+    }
+
+    DrawMult(...vbo: (VertexArrayBuffer)[] | undefined[]) {
+        DEBUG_LOG('F:Renderer::DrawMult -- START --', [arguments, vbo, this.va])
+
+        this.bind()
+        if (vbo.length === 0) {
+            this.Draw()
+        } else {
+            gl.viewport(0, 0, canvas.width, canvas.height)
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            vbo.forEach(e => {
+                if (e == undefined) throw new Error("Error Undefine In DrawMult");
+                e.bind()
+                gl.drawElements(gl.TRIANGLES, this.renderData.drawCount, gl.UNSIGNED_INT, this.renderData.offset);
+                DEBUG_LOG('F:Renderer::DrawMult -- MIDDLE --', e)
+            })
+        }
+
+        DEBUG_LOG('F:Renderer::DrawMult -- END --', [vbo, this.va])
     }
 
     bind() {

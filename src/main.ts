@@ -1,7 +1,6 @@
 import { myrenderData, shaderSourceTemp, UniforsCollectionsShader0 } from './DATA/mock_data';
 import { vertexDataSample, vertexDataSample2 } from './DATA/vertex_data';
 import { htmlimage } from './MODULES/Asset_Handler/image';
-import { IndexBuffer } from './MODULES/Buffers/vertex_buffer';
 import { DEBUG_LOG } from './MODULES/Logging/console_logging';
 import { Renderer } from './MODULES/Renderer/rendering';
 import { Shader } from './MODULES/Shaders/shader';
@@ -29,7 +28,7 @@ const main: () => void = async () => {
   */
 
   const BUFFER_0: BufferObject = bufferInit(vertexDataSample2.positions, vertexDataSample2.indices, [3, 2])
-  const BUFFER_1: BufferObject = bufferInit(vertexDataSample2.positions, vertexDataSample.indices, [3, 2])
+  const BUFFER_1: BufferObject = bufferInit(vertexDataSample.positions, vertexDataSample.indices, [3, 2])
 
   /* 
   * TEXTURES
@@ -65,7 +64,7 @@ const main: () => void = async () => {
 
   const forFun = (x: UniformData[]) => {
     //renderer.swapShader(ShaderProg, x)
-    renderer.Draw()
+    renderer.DrawMult(BUFFER_0.VAO)
 
     // renderer.updateUniforms(x)
 
