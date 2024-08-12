@@ -1,5 +1,5 @@
 import { myrenderData, shaderSourceTemp, UniforsCollectionsShader0 } from './DATA/mock_data';
-import { vertexDataSample, vertexDataSample2 } from './DATA/vertex_data';
+import { indices2, VertexData, vertices, vertices2 } from './DATA/VertexData/vertex_data';
 import { htmlimage } from './MODULES/Asset_Handler/image';
 import { DEBUG_LOG } from './MODULES/Logging/console_logging';
 import { Renderer } from './MODULES/Renderer/rendering';
@@ -20,10 +20,12 @@ const main: () => void = async () => {
   */
 
   runTests()
- 
+
   /* 
   * DATA
   */
+
+  const vertexData_0 = new VertexData(vertices, indices2)
 
   const uniformColor00 = UniforsCollectionsShader0.filter(e => (e.uniName == 'u_Color' || e.uniName == 'u_Texture'))
   DEBUG_LOG('D:UniformsMainData', uniformColor00)
@@ -38,8 +40,7 @@ const main: () => void = async () => {
   *  BUFFERS ***************************
   */
 
-  const BUFFER_0: BufferObject = bufferInit(vertexDataSample2.positions, vertexDataSample2.indices, [3, 2])
-  const BUFFER_1: BufferObject = bufferInit(vertexDataSample.positions, vertexDataSample.indices, [3, 2])
+  const BUFFER_0: BufferObject = bufferInit(vertexData_0, [3, 2])
 
   /* 
   * TEXTURES

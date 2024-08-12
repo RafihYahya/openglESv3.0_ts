@@ -3,6 +3,7 @@ import { UniformsName } from "../Types/common_enums"
 import { Vec4 } from "../Types/global_types"
 import { renderData } from "../Types/RenderTypes/renderer_types"
 import { ShadersSource, UniformData } from "../Types/ShaderTypes/shader_type"
+import { indices2 } from "./VertexData/vertex_data"
 
 export let shaderSourceTemp: ShadersSource = {
     vertexShader: VertexShaderSources[0],
@@ -46,7 +47,7 @@ export let vecClearColor: Vec4 = {
 
 export const myrenderData: renderData = {
     vec4: vecClearColor,
-    drawCount: 6,
+    drawCount: indices2.length,
     offset: 0
 }
 

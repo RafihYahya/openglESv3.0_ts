@@ -1,6 +1,7 @@
 /* TYPES */
 
 import { IndexBuffer, VertexArrayBuffer, VertexBuffer, VertexBufferLayout } from "../MODULES/Buffers/vertex_buffer"
+import { VEC3 } from "./MathTypes/vectors_t"
 
 export type Vec4 = {
     x: number,
@@ -9,6 +10,7 @@ export type Vec4 = {
     w: number,
 }
 export type glcleartuple = [GLclampf, GLclampf, GLclampf, GLclampf]
+export type vertexDataAttribute = [...VEC3, ...number[]]
 
 
 type BUFFER = [VertexArrayBuffer, VertexBuffer, IndexBuffer, VertexBufferLayout]

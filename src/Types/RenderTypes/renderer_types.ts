@@ -1,4 +1,4 @@
-import { Vec4 } from "./global_types"
+import { Vec4 } from "../global_types"
 
 export interface renderData {
     vec4: Vec4

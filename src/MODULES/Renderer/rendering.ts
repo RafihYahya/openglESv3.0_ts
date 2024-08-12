@@ -1,14 +1,24 @@
-import { Vec4 } from "../../Types/global_types";
-import { renderData } from "../../Types/renderer_types";
-import { UniformData } from "../../Types/shader_type";
+import {  Vec4 } from "../../Types/global_types";
 import { vec4 } from "../../Utils/type_utils";
 import { IndexBuffer, VertexArrayBuffer } from "../Buffers/vertex_buffer";
 import { canvas, gl } from "../Canva/canva";
 import { DEBUG_LOG } from "../Logging/console_logging";
 import { Shader } from "../Shaders/shader";
+import { renderData } from "../../Types/RenderTypes/renderer_types";
+import { UniformData } from "../../Types/ShaderTypes/shader_type";
+import { vecClearColor } from "../../DATA/mock_data";
 
 
-
+const renderDataNew = (drawCount: number, arg?: renderData): renderData => {
+    if (arg === undefined) {
+        return {
+            vec4: vecClearColor,
+            drawCount: drawCount,
+            offset: 0
+        }
+    }
+    return arg
+}
 
 
 const cglRender = (vector4: Vec4, count: GLsizei, offset: GLintptr) => {
