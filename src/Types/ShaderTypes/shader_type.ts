@@ -1,4 +1,4 @@
-import { Vec4 } from "./global_types"
+import { Vec4 } from "../global_types"
 
 export interface ShadersSource {
     vertexShader: string

@@ -24,6 +24,8 @@ export const runTests = (): void => {
     }
     myfunc<WebGL2RenderingContext>(gl)
 
+    
+
     type BINARYTREE<T> = {
         value: T
         node1: BINARYTREE<T> | null
@@ -50,5 +52,10 @@ export const runTests = (): void => {
         },
         node2: null
     })
+
+    const miaw99 = ({x,y,z}:any) => {
+        return x + z + z
+    }
+    miaw99({x:4,y:3,z:344})
 
 }

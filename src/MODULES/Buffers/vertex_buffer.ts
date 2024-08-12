@@ -1,4 +1,4 @@
-import { vBuffer, VertexBufferElements } from "../../Types/vertex_buffer"
+import { vBuffer, VertexBufferElements } from "../../Types/BufferTypes/vertex_buffer"
 import { GL_Error } from "../../Utils/fn_utils"
 import { gl } from "../Canva/canva"
 import { DEBUG_LOG } from "../Logging/console_logging"

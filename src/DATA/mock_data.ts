@@ -1,8 +1,8 @@
 import { FragmentShaderSources, VertexShaderSources } from "../MODULES/Shaders/GLSL/shader_glsl"
 import { UniformsName } from "../Types/common_enums"
 import { Vec4 } from "../Types/global_types"
-import { renderData } from "../Types/renderer_types"
-import { ShadersSource, UniformData } from "../Types/shader_type"
+import { renderData } from "../Types/RenderTypes/renderer_types"
+import { ShadersSource, UniformData } from "../Types/ShaderTypes/shader_type"
 
 export let shaderSourceTemp: ShadersSource = {
     vertexShader: VertexShaderSources[0],
@@ -13,16 +13,7 @@ export let shaderSourceTemp2: ShadersSource = {
     fragementShader: FragmentShaderSources[1]
 }
 
-/* let uniformDtTemp: Uniforms4fData = {
-    name: "u_Color",
-    data: { x: 0.2, y: 0.4, z: 0.6, w: 1.0 }
 
-}
-let uniformDtTemp2: Uniforms4fData = {
-    name: "u_Color",
-    data: { x: 0.2, y: 0.4, z: 0.6, w: 1.0 }
-
-} */
 let uniformColor00: UniformData = {
     uniName: UniformsName.COLOR,
     uniLocation: null,

@@ -7,7 +7,7 @@ import { Shader } from './MODULES/Shaders/shader';
 import { Texture } from './MODULES/Textures/texture';
 import { runTests } from './Tests/temp';
 import { BufferObject } from './Types/global_types';
-import { UniformData } from './Types/shader_type';
+import { UniformData } from './Types/ShaderTypes/shader_type';
 import { bufferInit, genRandVec4 } from './Utils/fn_utils';
 
 

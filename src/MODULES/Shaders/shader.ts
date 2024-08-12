@@ -1,6 +1,5 @@
 import { Vec4 } from "../../Types/global_types";
-import { ShaderID, ShadersSource, UniformData } from "../../Types/shader_type";
-import { IndexBuffer } from "../Buffers/vertex_buffer";
+import { ShaderID, ShadersSource, UniformData } from "../../Types/ShaderTypes/shader_type";
 import { gl } from "../Canva/canva";
 import { DEBUG_LOG } from "../Logging/console_logging";
 
