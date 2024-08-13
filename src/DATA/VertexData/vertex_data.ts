@@ -9,9 +9,11 @@ import { VEC3 } from "../../Types/MathTypes/vectors_t";
 export class VertexData {
   positions: vertexDataAttribute
   indices: number[]
-  constructor(positions: [...VEC3, ...number[]], indices: number[]) {
+  attributeArray:number[]
+  constructor(positions: [...VEC3, ...number[]], indices: number[],attribute:number[]) {
     this.positions = positions,
       this.indices = indices
+      this.attributeArray = attribute
   }
 }
 

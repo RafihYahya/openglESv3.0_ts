@@ -24,3 +24,9 @@ export type BufferObject = {
     VLAY: VertexBufferLayout
 }
 
+export interface TextureData {
+    localBuffer: HTMLImageElement | null
+    height: number
+    width: number
+
+}

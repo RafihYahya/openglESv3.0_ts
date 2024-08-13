@@ -1,12 +1,8 @@
+import { TextureData } from "../../Types/global_types"
 import { gl } from "../Canva/canva"
 import { DEBUG_LOG } from "../Logging/console_logging"
 
-interface TextureData {
-    localBuffer: HTMLImageElement | null
-    height: number
-    width: number
 
-}
 
 const TextureDataDefaultValue: TextureData = {
     localBuffer: null,

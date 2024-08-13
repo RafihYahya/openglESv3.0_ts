@@ -37,18 +37,18 @@ export const genRandVec4 = () => {
     return vecRandomUniform4
 }
 
-export const bufferInit = (vertexData: VertexData, count: number[]): BufferObject => {
+export const bufferInit = (vertexData: VertexData): BufferObject => {
     const VAO = new VertexArrayBuffer();
     const VBO = new VertexBuffer(vertexData.positions);
     const VIB = new IndexBuffer(vertexData.indices);
     const VLayout = new VertexBufferLayout();
     /*  */
-    count.forEach(e => {
+    vertexData.attributeArray.forEach(e => {
         VLayout.push(e, gl.FLOAT)
     })
     VAO.AddBuffer(VBO, VLayout);
 
-    DEBUG_LOG('F:BufferInit', [vertexData.positions, vertexData.indices, count])
+    DEBUG_LOG('F:BufferInit', [vertexData.positions, vertexData.indices, vertexData.attributeArray])
     DEBUG_LOG('D:BufferInit::DATA', [VAO, VBO, VIB, VLayout])
 
 

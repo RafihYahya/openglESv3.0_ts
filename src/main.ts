@@ -1,85 +1,19 @@
-import { myrenderData, shaderSourceTemp, UniforsCollectionsShader0 } from './DATA/mock_data';
-import { indices2, VertexData, vertices, vertices2 } from './DATA/VertexData/vertex_data';
-import { htmlimage } from './MODULES/Asset_Handler/image';
-import { DEBUG_LOG } from './MODULES/Logging/console_logging';
-import { Renderer } from './MODULES/Renderer/rendering';
-import { Shader } from './MODULES/Shaders/shader';
-import { Texture } from './MODULES/Textures/texture';
-import { runTests } from './Tests/temp';
-import { BufferObject } from './Types/global_types';
-import { UniformData } from './Types/ShaderTypes/shader_type';
-import { bufferInit, genRandVec4 } from './Utils/fn_utils';
+import { myrenderData, shaderSourceTemp, UniforsCollectionsShader0 } from "./DATA/mock_data";
+import { textData00 } from "./DATA/TextureData/mock_texture_data";
+import { indices2, vertices } from "./DATA/VertexData/vertex_data";
+import { GlobalSingeltonRenderer } from "./MODULES/Renderer/gs_renderer";
+import { RenderingObject } from "./MODULES/renderingObject";
 
 
 
 
 const main: () => void = async () => {
 
-  /* 
-  * TESTS
-  */
+  const myfirstObject =
+    new RenderingObject('object1', vertices, indices2, [3, 2], shaderSourceTemp, UniforsCollectionsShader0, textData00, myrenderData)
 
-  runTests()
-
-  /* 
-  * DATA
-  */
-
-  const vertexData_0 = new VertexData(vertices, indices2)
-
-  const uniformColor00 = UniforsCollectionsShader0.filter(e => (e.uniName == 'u_Color' || e.uniName == 'u_Texture'))
-  DEBUG_LOG('D:UniformsMainData', uniformColor00)
-
-  /* 
-  * SHADERS  ***************************
-  */
-
-  const ShaderProg = new Shader(shaderSourceTemp, uniformColor00)
-
-  /* 
-  *  BUFFERS ***************************
-  */
-
-  const BUFFER_0: BufferObject = bufferInit(vertexData_0, [3, 2])
-
-  /* 
-  * TEXTURES
-  */
-
-  const TEX = new Texture({ localBuffer: htmlimage, height: 300, width: 300 }); TEX.bind(0)
-  ShaderProg.setUniformBatch(UniforsCollectionsShader0.filter(e => e.uniName == 'u_Texture'), 0)
-
-  DEBUG_LOG('D:ShaderProg->G_uni', ShaderProg.g_uni[1]);
-
-  /* 
-  * RENDERING **********************
-  */
-
-  const renderer = new Renderer(ShaderProg, BUFFER_0.VAO, myrenderData)
-
-  let i = 0;
-  const render = () => {
-
-    let drawUniformData: UniformData[] = [{ ...(uniformColor00[0]), uniData: genRandVec4() }]
-
-    DEBUG_LOG('D:main::drawUniformData', drawUniformData)
-
-    forFun(drawUniformData)
+  GlobalSingeltonRenderer.loadMultRObjects([myfirstObject])
+  GlobalSingeltonRenderer.Draw()
 
 
-    setTimeout(() => {
-      requestAnimationFrame(render);
-      i++;
-    }, 1000);
-  }
-  requestAnimationFrame(render)
-
-  const forFun = (x: UniformData[]) => {
-    //renderer.swapShader(ShaderProg, x)
-    renderer.DrawMult(BUFFER_0.VAO)
-
-    // renderer.updateUniforms(x)
-
-
-  }
 }; main();
