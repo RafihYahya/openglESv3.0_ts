@@ -9,11 +9,15 @@ import { RenderingObject } from "./MODULES/renderingObject";
 
 const main: () => void = async () => {
 
+
+
   const myfirstObject =
     new RenderingObject('object1', vertices, indices2, [3, 2], shaderSourceTemp, UniforsCollectionsShader0, textData00, myrenderData)
 
   GlobalSingeltonRenderer.loadMultRObjects([myfirstObject])
   GlobalSingeltonRenderer.Draw()
+
+
 
 
 }; main();
