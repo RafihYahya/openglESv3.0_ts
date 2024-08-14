@@ -26,10 +26,10 @@ const positions: number[] = [
   -0.5, -0.5, 0.0   // top left 
 ];
 
-const myvec3_0: VEC3 = [0.5, 0.5, 0.0]
-const myvec3_1: VEC3 = [0.5, -0.5, 0.0]
-const myvec3_3: VEC3 = [-0.5, -0.5, 0.0]
-const myvec3_4: VEC3 = [-0.5, 0.5, 0.0]
+const myvec3_0: VEC3 = [0.40, 0.5, 0.2]
+const myvec3_1: VEC3 = [0.75, -0.5, 0.2]
+const myvec3_3: VEC3 = [-0.75, -0.5, 0.2]
+const myvec3_4: VEC3 = [-0.2, 0.5, 0.2]
 
 const indices: number[] = [0, 1, 3, 1, 0, 3];
 
@@ -47,7 +47,7 @@ export const vertices: vertexDataAttribute = [
 
 export const vertices2: vertexDataAttribute = [
   // positions   // texture coords
-  ...myvec3_0, 0.0,   // top right
+  ...myvec3_0, 0.0, 0.0,   // top right
   ...myvec3_1, 0.0, 1.0,   // bottom right
   ...myvec3_3, 1.0, 1.0,   // bottom left
   ...myvec3_4, 1.0, 0.0,    // top left 
